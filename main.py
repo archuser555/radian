@@ -1,35 +1,29 @@
-# Just draw a star with math and python LOL
 import turtle
 import math
 
+# Calculate the points in the star shape
 pi = math.pi
-points = [pi*2, pi/2, pi, (4*pi)/3, (5*pi)/3] # points...
-steps = [3, 0, 2, 4, 1, 3] # Here is the cordinates from x & y that will form the star shape
-size = 100 #size of star
-x = []
-y = []
-i = 0
+points = [pi*2, pi/2, pi, (4*pi)/3, (5*pi)/3]
+x = [math.cos(point) for point in points]  # Calculate the x coordinates
+y = [math.sin(point) for point in points]  # Calculate the y coordinates
 
-while True:
-    if(i > len(points)-1):
-        break
-    x.append(math.cos(points[i]))
-    y.append(math.sin(points[i]))
-    i += 1
+# Define the steps to draw the star shape
+steps = [3, 0, 2, 4, 1, 3]
+size = 100  # Size of the star
 
-#setup something's
+# Set up the turtle and the screen
 t = turtle.Turtle()
 turtle.Screen().bgcolor("red")
 t.pencolor("green")
 t.pensize(20)
 t.up()
-i = 0
-#Doing Moves...
-while i < len(steps):
-    if(i == 1):
-    	t.down() #this fix a small issue while drawing the start
-    t.goto(x[steps[i]]*size, y[steps[i]]*size)
-    i += 1
-    print(i)
 
+# Iterate through the steps and draw the star shape
+for i, step in enumerate(steps):
+    # Lower the pen to start drawing the star
+    if i == 1:
+        t.down()
+    t.goto(x[step]*size, y[step]*size)  # Move the turtle to the next point
+
+# Keep the window open until it is closed manually
 turtle.mainloop()
